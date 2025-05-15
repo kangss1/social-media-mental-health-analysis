@@ -1,0 +1,144 @@
+
+Adjusted Model: Depression 
+
+Call:
+lm(formula = Depression_score ~ Time_spent + No_purpose_use + 
+    Age + Gender + Employment_status, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.0389 -0.8046  0.0761  0.9611  3.6188 
+
+Coefficients:
+                                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                          3.046274   0.653767   4.660 4.23e-06 ***
+Time_spent                           0.094832   0.044271   2.142 0.032749 *  
+No_purpose_use                       0.213857   0.057281   3.733 0.000214 ***
+Age                                 -0.025096   0.009012  -2.785 0.005594 ** 
+GenderMale                          -0.069044   0.117886  -0.586 0.558395    
+GenderNB                             0.775832   1.195582   0.649 0.516739    
+GenderNon binary                     1.149831   1.188814   0.967 0.333983    
+GenderNon-binary                     1.178954   1.202674   0.980 0.327501    
+GenderNonbinary                      0.363688   1.190345   0.306 0.760109    
+GenderThere are others???           -2.558858   1.198972  -2.134 0.033391 *  
+GenderTrans                          2.406810   1.244036   1.935 0.053685 .  
+Genderunsure                        -0.463521   1.199272  -0.387 0.699316    
+Employment_statusSalaried Worker    -0.359720   0.447078  -0.805 0.421494    
+Employment_statusSchool Student     -0.485706   0.517522  -0.939 0.348503    
+Employment_statusUniversity Student -0.093505   0.473463  -0.197 0.843535    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.184 on 430 degrees of freedom
+  (36 observations deleted due to missingness)
+Multiple R-squared:  0.1607,	Adjusted R-squared:  0.1334 
+F-statistic: 5.882 on 14 and 430 DF,  p-value: 1.32e-10
+
+
+Adjusted Model: Anxiety 
+
+Call:
+lm(formula = Anxiety_score ~ Time_spent + No_purpose_use + Age + 
+    Gender + Employment_status, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.2317 -0.8018  0.1254  0.9680  2.8661 
+
+Coefficients:
+                                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                          2.882263   0.644127   4.475 9.81e-06 ***
+Time_spent                           0.134738   0.043619   3.089  0.00214 ** 
+No_purpose_use                       0.099820   0.056437   1.769  0.07765 .  
+Age                                 -0.019916   0.008879  -2.243  0.02540 *  
+GenderMale                          -0.100471   0.116148  -0.865  0.38750    
+GenderNB                             1.479877   1.177953   1.256  0.20969    
+GenderNon binary                     0.868132   1.171285   0.741  0.45899    
+GenderNon-binary                     1.559646   1.184941   1.316  0.18880    
+GenderNonbinary                     -0.032048   1.172793  -0.027  0.97821    
+GenderThere are others???           -2.964170   1.181293  -2.509  0.01247 *  
+GenderTrans                          1.872081   1.225693   1.527  0.12741    
+Genderunsure                        -1.929386   1.181589  -1.633  0.10323    
+Employment_statusSalaried Worker     0.312362   0.440485   0.709  0.47863    
+Employment_statusSchool Student      0.312734   0.509891   0.613  0.53998    
+Employment_statusUniversity Student  0.460143   0.466482   0.986  0.32449    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.167 on 430 degrees of freedom
+  (36 observations deleted due to missingness)
+Multiple R-squared:  0.1316,	Adjusted R-squared:  0.1034 
+F-statistic: 4.656 on 14 and 430 DF,  p-value: 6.309e-08
+
+
+Adjusted Model: Distraction 
+
+Call:
+lm(formula = Easily_distracted ~ Time_spent + No_purpose_use + 
+    Age + Gender + Employment_status, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.0693 -0.6463  0.0000  0.8500  2.2757 
+
+Coefficients:
+                                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                          1.640602   0.579469   2.831  0.00485 ** 
+Time_spent                           0.088573   0.039240   2.257  0.02450 *  
+No_purpose_use                       0.272677   0.050772   5.371 1.29e-07 ***
+Age                                 -0.009288   0.007988  -1.163  0.24558    
+GenderMale                           0.001059   0.104489   0.010  0.99192    
+GenderNB                            -0.435219   1.059709  -0.411  0.68150    
+GenderNon binary                     1.204413   1.053710   1.143  0.25367    
+GenderNon-binary                     0.176940   1.065995   0.166  0.86825    
+GenderNonbinary                      0.477089   1.055067   0.452  0.65136    
+GenderThere are others???            1.280487   1.062713   1.205  0.22890    
+GenderTrans                          1.444347   1.102657   1.310  0.19094    
+Genderunsure                         0.445153   1.062980   0.419  0.67559    
+Employment_statusSalaried Worker     0.661104   0.396269   1.668  0.09598 .  
+Employment_statusSchool Student      0.538571   0.458708   1.174  0.24100    
+Employment_statusUniversity Student  0.727891   0.419656   1.734  0.08355 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.05 on 430 degrees of freedom
+  (36 observations deleted due to missingness)
+Multiple R-squared:  0.1484,	Adjusted R-squared:  0.1207 
+F-statistic: 5.354 on 14 and 430 DF,  p-value: 1.893e-09
+
+
+Adjusted Model: Sleep 
+
+Call:
+lm(formula = Sleep_issues ~ Time_spent + No_purpose_use + Age + 
+    Gender + Employment_status, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.9938 -1.1492  0.1944  1.2298  2.5136 
+
+Coefficients:
+                                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                          2.126855   0.762590   2.789 0.005522 ** 
+Time_spent                           0.045302   0.051641   0.877 0.380840    
+No_purpose_use                       0.257464   0.066816   3.853 0.000134 ***
+Age                                 -0.005875   0.010512  -0.559 0.576559    
+GenderMale                           0.187855   0.137509   1.366 0.172612    
+GenderNB                            -1.929320   1.394594  -1.383 0.167251    
+GenderNon binary                    -2.548453   1.386699  -1.838 0.066784 .  
+GenderNon-binary                     1.443454   1.402866   1.029 0.304090    
+GenderNonbinary                     -2.290988   1.388484  -1.650 0.099675 .  
+GenderThere are others???           -2.076975   1.398547  -1.485 0.138251    
+GenderTrans                          1.941674   1.451113   1.338 0.181585    
+Genderunsure                         1.832047   1.398898   1.310 0.191018    
+Employment_statusSalaried Worker    -0.222304   0.521496  -0.426 0.670116    
+Employment_statusSchool Student     -0.115398   0.603666  -0.191 0.848489    
+Employment_statusUniversity Student  0.243299   0.552273   0.441 0.659767    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.381 on 430 degrees of freedom
+  (36 observations deleted due to missingness)
+Multiple R-squared:  0.1114,	Adjusted R-squared:  0.08245 
+F-statistic:  3.85 on 14 and 430 DF,  p-value: 3.445e-06
+

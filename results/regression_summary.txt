@@ -1,0 +1,94 @@
+
+Model: Depression 
+
+Call:
+lm(formula = Depression_score ~ Time_spent + No_purpose_use, 
+    data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.9790 -0.9790  0.1328  1.0210  2.3736 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)     1.82962    0.23662   7.732 7.19e-14 ***
+Time_spent      0.15754    0.04264   3.695 0.000248 ***
+No_purpose_use  0.24083    0.05764   4.178 3.54e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.215 on 442 degrees of freedom
+  (36 observations deleted due to missingness)
+Multiple R-squared:  0.09181,	Adjusted R-squared:  0.0877 
+F-statistic: 22.34 on 2 and 442 DF,  p-value: 5.71e-10
+
+
+Model: Anxiety 
+
+Call:
+lm(formula = Anxiety_score ~ Time_spent + No_purpose_use, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.1558 -0.7880  0.1448  0.9668  1.9241 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)     2.47457    0.23241  10.647  < 2e-16 ***
+Time_spent      0.17804    0.04188   4.251  2.6e-05 ***
+No_purpose_use  0.12261    0.05662   2.166   0.0309 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.193 on 442 degrees of freedom
+  (36 observations deleted due to missingness)
+Multiple R-squared:  0.06611,	Adjusted R-squared:  0.06189 
+F-statistic: 15.65 on 2 and 442 DF,  p-value: 2.724e-07
+
+
+Model: Distraction 
+
+Call:
+lm(formula = Easily_distracted ~ Time_spent + No_purpose_use, 
+    data = data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-3.06756 -0.71620 -0.01504  0.93244  2.33477 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)     1.90474    0.20472   9.304  < 2e-16 ***
+Time_spent      0.11712    0.03689   3.175   0.0016 ** 
+No_purpose_use  0.29202    0.04987   5.856 9.28e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.051 on 442 degrees of freedom
+  (36 observations deleted due to missingness)
+Multiple R-squared:  0.122,	Adjusted R-squared:  0.118 
+F-statistic: 30.71 on 2 and 442 DF,  p-value: 3.242e-13
+
+
+Model: Sleep 
+
+Call:
+lm(formula = Sleep_issues ~ Time_spent + No_purpose_use, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.7667 -1.2778  0.2333  1.2803  2.6292 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)     1.95188    0.27367   7.132 4.06e-12 ***
+Time_spent      0.06992    0.04931   1.418    0.157    
+No_purpose_use  0.27905    0.06667   4.186 3.43e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.405 on 442 degrees of freedom
+  (36 observations deleted due to missingness)
+Multiple R-squared:  0.0546,	Adjusted R-squared:  0.05032 
+F-statistic: 12.76 on 2 and 442 DF,  p-value: 4.086e-06
+

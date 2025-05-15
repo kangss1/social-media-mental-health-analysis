@@ -1,0 +1,187 @@
+---
+title: "Social Media and Mental Health Analysis"
+author: "INFO-I-421 Team — Indiana University Indianapolis"
+date: "Spring 2025"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    theme: readable
+---
+
+# Introduction
+
+This notebook presents the analysis for **INFO-I-421: Applications of Data Mining (Spring 2025)**,  
+under the instruction of **Ashley Miller (M.S. Data Science, B.S. Marketing)**.  
+The project investigates the relationship between **social media usage patterns** and **mental health outcomes**,  
+using survey data from Kaggle.  
+
+Specifically, we explore how:
+- **Time spent on social media**  
+- **Purposeless use frequency**  
+relate to measures of **depression**, **anxiety**, **distraction**, and **sleep issues**.
+
+---
+
+# 1. Setup and Libraries
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(corrplot)
+# setwd("path/to/social-media-mental-health-analysis")
+```
+
+---
+
+# 2. Load and Prepare Data
+
+```{r data-load}
+data <- read.csv("data/smmh.csv", stringsAsFactors = FALSE)
+head(data)
+dim(data)
+```
+
+```{r data-clean}
+time_labels <- c("Less than 1 hour", "Between 1 and 2 hours", "Between 2 and 3 hours",
+                 "Between 3 and 4 hours", "Between 4 and 5 hours", "More than 5 hours")
+
+data[[7]] <- as.factor(data[[7]])
+colnames(data)[7] <- "Use_SM"
+colnames(data)[8] <- "Platforms_used"
+data$Time_spent_raw <- data[[9]]
+data$Time_spent_raw[data$Use_SM == "No"] <- "Not Use SM"
+data$Time_spent_raw[is.na(data$Time_spent_raw)] <- "Not Use SM"
+
+data$Time_spent_label <- factor(data$Time_spent_raw,
+                                levels = c(time_labels, "Not Use SM"),
+                                labels = c("Less than 1h", "1–2h", "2–3h", "3–4h", "4–5h", "More than 5h", "Not Use SM"))
+
+data$Time_spent <- as.numeric(factor(ifelse(data$Time_spent_label == "Not Use SM", NA, as.character(data$Time_spent_label)),
+                                     levels = c("Less than 1h", "1–2h", "2–3h", "3–4h", "4–5h", "More than 5h")))
+
+data[[10]] <- as.numeric(data[[10]]); colnames(data)[10] <- "No_purpose_use"
+data[[13]] <- as.numeric(data[[13]]); colnames(data)[13] <- "Easily_distracted"
+data[[14]] <- as.numeric(data[[14]]); colnames(data)[14] <- "Anxiety_score"
+data[[19]] <- as.numeric(data[[19]]); colnames(data)[19] <- "Depression_score"
+data[[21]] <- as.numeric(data[[21]]); colnames(data)[21] <- "Sleep_issues"
+
+data[[2]] <- as.numeric(data[[2]]); colnames(data)[2] <- "Age"
+data[[3]] <- as.factor(data[[3]]); colnames(data)[3] <- "Gender"
+data[[5]] <- as.factor(data[[5]]); colnames(data)[5] <- "Employment_status"
+
+data$High_Depression <- factor(ifelse(data$Depression_score >= 4, "Yes", "No"))
+summary(data)
+```
+
+---
+
+# 3. Correlation and Regression Analysis
+
+```{r correlations}
+iv_dv_data <- data[, c("Time_spent", "No_purpose_use", "Depression_score", "Anxiety_score", "Easily_distracted", "Sleep_issues")]
+cor_matrix <- cor(iv_dv_data, use = "complete.obs")
+cor_matrix
+```
+
+```{r regressions}
+models <- list(
+  Depression = lm(Depression_score ~ Time_spent + No_purpose_use, data = data),
+  Anxiety = lm(Anxiety_score ~ Time_spent + No_purpose_use, data = data),
+  Distraction = lm(Easily_distracted ~ Time_spent + No_purpose_use, data = data),
+  Sleep = lm(Sleep_issues ~ Time_spent + No_purpose_use, data = data)
+)
+
+models2 <- list(
+  Depression = lm(Depression_score ~ Time_spent + No_purpose_use + Age + Gender + Employment_status, data = data),
+  Anxiety = lm(Anxiety_score ~ Time_spent + No_purpose_use + Age + Gender + Employment_status, data = data),
+  Distraction = lm(Easily_distracted ~ Time_spent + No_purpose_use + Age + Gender + Employment_status, data = data),
+  Sleep = lm(Sleep_issues ~ Time_spent + No_purpose_use + Age + Gender + Employment_status, data = data)
+)
+
+summary(models$Depression)
+summary(models2$Depression)
+```
+
+---
+
+# 4. Visualizations
+
+```{r boxplots, fig.width=8, fig.height=5}
+ggplot(data %>% filter(!is.na(Time_spent_label)),
+       aes(x = Time_spent_label, y = Depression_score)) +
+  geom_boxplot(fill = "lightblue") +
+  labs(title = "Depression Score by Time Spent on Social Media",
+       x = "Time Spent Category", y = "Depression Score") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r anxiety-box, fig.width=8, fig.height=5}
+ggplot(data %>% filter(!is.na(Time_spent_label)),
+       aes(x = Time_spent_label, y = Anxiety_score)) +
+  geom_boxplot(fill = "lightgreen") +
+  labs(title = "Anxiety Score by Time Spent on Social Media",
+       x = "Time Spent Category", y = "Anxiety Score") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r histograms, fig.width=8, fig.height=5}
+ggplot(data, aes(x = Depression_score)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black") +
+  labs(title = "Distribution of Depression Scores")
+
+ggplot(data, aes(x = Time_spent)) +
+  geom_histogram(binwidth = 1, fill = "orange", color = "black") +
+  labs(title = "Distribution of Time Spent on Social Media")
+```
+
+```{r scatterplots, fig.width=8, fig.height=5}
+ggplot(data, aes(x = Time_spent, y = Anxiety_score)) +
+  geom_jitter(alpha = 0.4) +
+  geom_smooth(method = "lm", color = "red") +
+  labs(title = "Time Spent vs Anxiety Score")
+
+ggplot(data, aes(x = Time_spent, y = Depression_score)) +
+  geom_jitter(alpha = 0.4) +
+  geom_smooth(method = "lm", color = "blue") +
+  labs(title = "Time Spent vs Depression Score")
+```
+
+```{r barplot, fig.width=8, fig.height=5}
+data %>%
+  filter(!is.na(Time_spent)) %>%
+  group_by(Time_spent_label) %>%
+  summarise(High_Depression_Rate = mean(High_Depression == "Yes")) %>%
+  ggplot(aes(x = Time_spent_label, y = High_Depression_Rate)) +
+  geom_col(fill = "darkred") +
+  labs(title = "Rate of High Depression by Time Spent",
+       x = "Time Spent Category", y = "Proportion with High Depression") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r heatmap, fig.width=7, fig.height=5}
+cor_matrix_subset <- cor_matrix[c("Time_spent", "No_purpose_use"),
+                                c("Depression_score", "Anxiety_score", "Easily_distracted", "Sleep_issues")]
+corrplot(cor_matrix_subset, method = "color", addCoef.col = "black",
+         tl.col = "black", title = "Correlation: Social Media Use vs Mental Health Outcomes",
+         mar = c(0, 0, 2, 0))
+```
+
+---
+
+# 5. Conclusion
+
+The analysis demonstrates a consistent relationship between **social media use** and **mental health indicators**.  
+Notably, **purposeless use** is a stronger and more reliable predictor of negative psychological outcomes  
+than overall time spent online.  
+
+These results support the hypothesis that *the quality of social media engagement matters as much as the quantity*,  
+with purposeless or passive use linked to higher levels of depression, anxiety, and distraction.  
+
+---
+
+# 6. References
+
+- Ahmed, S. (2023). *Social Media and Mental Health Dataset*. Kaggle.  
+- Wickham, H. (2019). *ggplot2: Elegant Graphics for Data Analysis.* Springer.  
+- R Core Team. (2023). *R: A Language and Environment for Statistical Computing.* R Foundation for Statistical Computing.
