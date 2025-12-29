@@ -4,7 +4,7 @@
 **Department:** Human-Centered Computing  
 **School:** Indiana University School of Informatics and Computing, Indianapolis  
 **Semester:** Spring 2025  
-**Date:** May 2025 
+**Date:** May 2025  
 **Instructor:** Ashley Miller (M.S. Data Science, B.S. Marketing)  
 **Team Leader:** Sandeep Kang  
 **Team Members:** Patricia Esparza, Alexander Pitchford, Yamlak Bogale  
