@@ -7,7 +7,7 @@
 **Date:** May 2025  
 **Instructor:** Ashley Miller (M.S. Data Science, B.S. Marketing)  
 **Team Leader:** Sandeep Kang  
-**Team Members:** Patricia Esparza, Alexander Pitchford, Yamlak Bogale  
+**Team Members:** Caden Schoonveld, Matthew Sparkman, Court Swenson, Destiny Voyles-Perez, Haluh Saleh 
 
 ---
 
